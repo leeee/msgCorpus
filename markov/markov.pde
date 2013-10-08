@@ -11,28 +11,12 @@ void setup()
     if (db.connect()) {      
         db.query( "SELECT message.is_from_me,message.text,handle.id FROM " 
         + "handle INNER JOIN message ON message.handle_id = handle.ROWID "
-        + "ORDER BY handle.id LIMIT 10");
+        + "ORDER BY handle.id");
         
         while (db.next()) {
-            TableOne t = new TableOne();
+            Message t = new Message();
             db.setFromRow( t );
             println( t );
         }
-    }
-}
-
-class TableOne
-{
-    public String text;
-    public int isFromMe;
-    public String id;
-    
-    public String toString ()
-    {
-      if (isFromMe == 0) {
-        return String.format("<- text: %s from: %s", text, id);
-      } else {
-        return String.format("-> text: %s to: %s", text, id);
-      }
     }
 }
