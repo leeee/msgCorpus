@@ -10,7 +10,6 @@ void testApp::setup(){
   
   ofxSQLiteSelect sel = sqlite.select("is_from_me,text,handle_id").from("message");
   sel.execute().begin();
-  
   while (sel.hasNext()) {
     int is_from_me = sel.getInt(0);
     int handle_id = sel.getInt(1);
