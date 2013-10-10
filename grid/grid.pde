@@ -4,7 +4,7 @@ SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
 final int N_FACTOR = 2;
-final int POINT_SIZE = 3;
+final int POINT_SIZE = 4;
 PFont font;
 
 void setup() {
@@ -34,7 +34,7 @@ void setup() {
   
   int dimension = ((int) Math.sqrt(messages.size())) * POINT_SIZE;
   size(dimension, dimension);
-  noStroke();
+//  noStroke();
 }
 
 void draw() {
@@ -49,10 +49,11 @@ void draw() {
       Person person = peopleMap.get(message.id);
       float a = 255;
       if (message.isFromMe == 1) {
-        a = 240;
+        a = 175;
       }
-      fill(person.r,person.g,person.b);
-      ellipse(j,i,POINT_SIZE/2.0, POINT_SIZE/2.0);
+      fill(person.r,person.g,person.b,a);
+      stroke(person.r,person.g,person.b,a);
+      ellipse(j,i,POINT_SIZE*0.5, POINT_SIZE*0.5);
       x++;
     }
   }
