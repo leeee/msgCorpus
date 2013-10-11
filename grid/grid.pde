@@ -4,10 +4,12 @@ SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
 final int N_FACTOR = 2;
-final int POINT_SIZE = 4;
+final int POINT_SIZE = 3;
 PFont font;
 
 void setup() {
+  // TODO: add mouseover interaction to see who each dot is
+  
   font = createFont("Arial", 16, true);
 
   messages = new ArrayList();
@@ -53,7 +55,8 @@ void draw() {
       }
       fill(person.r,person.g,person.b,a);
       stroke(person.r,person.g,person.b,a);
-      ellipse(j,i,POINT_SIZE*0.5, POINT_SIZE*0.5);
+      float radius = POINT_SIZE*0.5;
+      ellipse(j+radius,i+radius,radius, radius);
       x++;
     }
   }
