@@ -8,3 +8,4 @@ instructions
 2. find this file 
 	User > Library > Application Support > MobileSync > Backup > [latest backup] > 3d0d7e5fb2ce288813306e4d4636395e047a3d28
 3. copy it into the sketch folder and rename it 'messages.db'
+4. you need to install the BezierSQLib library
