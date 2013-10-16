@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sqlite3, nltk, random, sys
+import sqlite3, random, sys
 
 conn = sqlite3.connect('messages.db')
 

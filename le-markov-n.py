@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import sqlite3, nltk, random, sys
+import sqlite3, random, sys
 
 conn = sqlite3.connect('messages.db')
 
 c = conn.cursor()
 
-# dictionary of words to followup words and probabilities?
+# todo: add probabilities
+# todo: autocomplete
 dictionary = {}
 nonword = '\n'
 nfactor = 2
