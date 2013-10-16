@@ -21,10 +21,10 @@ for row in c.execute('SELECT text FROM message WHERE is_from_me=1'):
 
 maxwords = 100
 
-for i in xrange(maxwords):
-    newword = random.choice(dictionary[w1])
-    if newword == nonword:
-    	sys.stdout.write('\n')
-    	sys.exit()
-    sys.stdout.write(newword + ' ')
-    w1 = newword
+for x in xrange(100):
+	for i in xrange(maxwords):
+	    newword = random.choice(dictionary[w1])
+	    # if newword == nonword:
+	    # 	sys.stdout.write('\n')
+	    sys.stdout.write(newword + ' ')
+	    w1 = newword
