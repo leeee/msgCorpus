@@ -45,7 +45,6 @@ void draw() {
   int row = mouseY / POINT_SIZE;
   int hoverPersonIndex = row * dimension + column;
   hoverPerson = messages.get(hoverPersonIndex).id;
-  println(dimension + " " + mouseY + " " + row + " " + mouseX + " " + column + " " + hoverPerson);
   for (int i = 0; i < height; i+=POINT_SIZE) {
     for (int j = 0; j < width; j+=POINT_SIZE) {
       if (x >= messages.size()) {
@@ -63,7 +62,6 @@ void draw() {
       fill(person.r,person.g,person.b,a);
 //      stroke(person.r,person.g,person.b,a);
       float radius = (float)POINT_SIZE;
-      println(radius);
       ellipse(j+radius,i+radius,radius, radius);
       x++;
     }
