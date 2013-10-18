@@ -3,14 +3,12 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 3;
+final int POINT_SIZE = 4;
 PFont font;
 String hoverPerson = "";
 int dimension;
 
 void setup() {
-  // TODO: add mouseover interaction to see who each dot is
-  
   font = createFont("Arial", 16, true);
 
   messages = new ArrayList();
@@ -64,7 +62,8 @@ void draw() {
       }
       fill(person.r,person.g,person.b,a);
       stroke(person.r,person.g,person.b,a);
-      float radius = POINT_SIZE*0.5;
+      float radius = (float)POINT_SIZE;
+      println(radius);
       ellipse(j+radius,i+radius,radius, radius);
       x++;
     }
