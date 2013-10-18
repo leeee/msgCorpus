@@ -5,6 +5,7 @@ ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
 final int POINT_SIZE = 3;
 PFont font;
+String hoverPerson = "";
 
 void setup() {
   // TODO: add mouseover interaction to see who each dot is
@@ -41,7 +42,6 @@ void setup() {
 void draw() {
   background(255);
   int x = 0;
-  String hoverPerson = "";
   for (int i = 0; i < height; i+=POINT_SIZE) {
     for (int j = 0; j < width; j+=POINT_SIZE) {
       if (x >= messages.size()) {
@@ -49,9 +49,12 @@ void draw() {
       }
       Message message = messages.get(x);
       Person person = peopleMap.get(message.id);
-      float a = 255;
+      float a = 125;
+      if (hoverPerson.equals(message.id)) {
+        a = 255;
+      }
       if (message.isFromMe == 1) {
-        a = 175;
+        a = a - 100;
       }
       fill(person.r,person.g,person.b,a);
       stroke(person.r,person.g,person.b,a);
