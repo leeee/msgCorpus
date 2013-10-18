@@ -3,7 +3,7 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 3;
+final int POINT_SIZE = 5;
 PFont font;
 String hoverPerson = "";
 int dimension;
@@ -16,13 +16,14 @@ void setup() {
   messages = new ArrayList();
   peopleMap = new HashMap();
   db = new SQLite(this, "messages.db");  
-
+  int limit = 0;
   if (db.connect()) {      
     db.query( "SELECT message.is_from_me,message.text,handle.id FROM " 
       + "handle INNER JOIN message ON message.handle_id = handle.ROWID "
       + "ORDER BY message.date");
 
-    while (db.next ()) {
+    while (db.next () && limit < 1000) {
+      limit++;
       Message msg = new Message();
       db.setFromRow(msg);
       messages.add(msg);
@@ -35,7 +36,7 @@ void setup() {
     }
   }
   
-  int dimension = ((int) Math.sqrt(messages.size()));
+  dimension = ((int) Math.sqrt(messages.size()));
   size(dimension * POINT_SIZE, dimension * POINT_SIZE);
 //  noStroke();
 }
@@ -47,7 +48,7 @@ void draw() {
   int row = mouseY / POINT_SIZE;
   int hoverPersonIndex = row * dimension + column;
   hoverPerson = messages.get(hoverPersonIndex).id;
-  println(row + " " + column + " " + hoverPerson);
+  println(dimension + " " + mouseY + " " + row + " " + mouseX + " " + column + " " + hoverPerson);
   for (int i = 0; i < height; i+=POINT_SIZE) {
     for (int j = 0; j < width; j+=POINT_SIZE) {
       if (x >= messages.size()) {
