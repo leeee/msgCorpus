@@ -35,7 +35,7 @@ void setup() {
   
   dimension = ((int) Math.sqrt(messages.size()));
   size(dimension * POINT_SIZE, dimension * POINT_SIZE);
-//  noStroke();
+  noStroke();
 }
 
 void draw() {
@@ -61,7 +61,7 @@ void draw() {
         a = a - 75;
       }
       fill(person.r,person.g,person.b,a);
-      stroke(person.r,person.g,person.b,a);
+//      stroke(person.r,person.g,person.b,a);
       float radius = (float)POINT_SIZE;
       println(radius);
       ellipse(j+radius,i+radius,radius, radius);
