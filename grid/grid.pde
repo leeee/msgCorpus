@@ -3,7 +3,7 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 5;
+final int POINT_SIZE = 3;
 PFont font;
 String hoverPerson = "";
 int dimension;
@@ -16,14 +16,13 @@ void setup() {
   messages = new ArrayList();
   peopleMap = new HashMap();
   db = new SQLite(this, "messages.db");  
-  int limit = 0;
+
   if (db.connect()) {      
     db.query( "SELECT message.is_from_me,message.text,handle.id FROM " 
       + "handle INNER JOIN message ON message.handle_id = handle.ROWID "
       + "ORDER BY message.date");
 
-    while (db.next () && limit < 1000) {
-      limit++;
+    while (db.next ()) {
       Message msg = new Message();
       db.setFromRow(msg);
       messages.add(msg);
@@ -68,9 +67,6 @@ void draw() {
       float radius = POINT_SIZE*0.5;
       ellipse(j+radius,i+radius,radius, radius);
       x++;
-//      if (dist(mouseX, mouseY, j+radius, i+radius) <= radius) {
-//        hoverPerson = message.id;
-//      }
     }
   }
   
