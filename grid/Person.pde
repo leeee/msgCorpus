@@ -1,10 +1,10 @@
 class Person {
-  public float r,g,b;
+  public float h,s,b;
   String id;
   
-  public Person() {
-    r = random(255);
-    g = random(255);
-    b = random(255);
+  public Person(float h, float s, float b) {
+    this.h = h;
+    this.s = s;
+    this.b = b;
   }
 }

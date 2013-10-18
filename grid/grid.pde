@@ -3,14 +3,15 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 4;
+final int POINT_SIZE = 3;
 PFont font;
 String hoverPerson = "";
 int dimension;
+final float GOLDEN_RATIO = 0.618033988749895;
 
 void setup() {
+  float h = random(1);
   font = createFont("Arial", 16, true);
-
   messages = new ArrayList();
   peopleMap = new HashMap();
   db = new SQLite(this, "messages.db");  
@@ -28,7 +29,9 @@ void setup() {
       if (peopleMap.containsKey(msg.id)) {
         msg.person = peopleMap.get(msg.id);
       } else {
-        peopleMap.put(msg.id,new Person());
+        h += GOLDEN_RATIO;
+        h %= 1;
+        peopleMap.put(msg.id,new Person(h,.99,.99));
       }
     }
   }
@@ -59,7 +62,9 @@ void draw() {
       if (message.isFromMe == 1) {
         a = a - 75;
       }
-      fill(person.r,person.g,person.b,a);
+      colorMode(HSB,1,1,1);
+      fill(person.h,person.s,person.b,a);
+      colorMode(RGB);
 //      stroke(person.r,person.g,person.b,a);
       float radius = (float)POINT_SIZE;
       ellipse(j+radius,i+radius,radius, radius);
