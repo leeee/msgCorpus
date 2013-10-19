@@ -29,7 +29,7 @@ void setup() {
       if (peopleMap.containsKey(msg.id)) {
         msg.person = peopleMap.get(msg.id);
       } else {
-        h += GOLDEN_RATIO;
+        h += GOLDEN_RATIO*.75;
         h %= 1;
         peopleMap.put(msg.id,new Person(h,.99,.99));
       }
@@ -64,7 +64,7 @@ void draw() {
       }
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,a);
-      colorMode(RGB);
+      colorMode(RGB,255,255,255);
 //      stroke(person.r,person.g,person.b,a);
       float radius = (float)POINT_SIZE;
       ellipse(j+radius,i+radius,radius, radius);
