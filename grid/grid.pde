@@ -5,7 +5,6 @@ ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
 final int POINT_SIZE = 3;
 PFont font;
-String hoverPerson = "";
 int dimension;
 final float GOLDEN_RATIO = 0.618033988749895;
 
@@ -31,7 +30,7 @@ void setup() {
       } else {
         h += GOLDEN_RATIO*.75;
         h %= 1;
-        peopleMap.put(msg.id,new Person(h,.99,.99));
+        peopleMap.put(msg.id,new Person(h,.5,.90));
       }
     }
   }
@@ -44,10 +43,6 @@ void setup() {
 void draw() {
   background(255);
   int x = 0;
-  int column = mouseX / POINT_SIZE;
-  int row = mouseY / POINT_SIZE;
-  int hoverPersonIndex = row * dimension + column;
-  hoverPerson = messages.get(hoverPersonIndex).id;
   for (int i = 0; i < height; i+=POINT_SIZE) {
     for (int j = 0; j < width; j+=POINT_SIZE) {
       if (x >= messages.size()) {
@@ -55,10 +50,7 @@ void draw() {
       }
       Message message = messages.get(x);
       Person person = peopleMap.get(message.id);
-      float a = 100;
-      if (hoverPerson.equals(message.id)) {
-        a = 255;
-      }
+      float a = 255;
       if (message.isFromMe == 1) {
         a = a - 75;
       }
@@ -67,18 +59,9 @@ void draw() {
       colorMode(RGB,255,255,255);
 //      stroke(person.r,person.g,person.b,a);
       float radius = (float)POINT_SIZE;
-      ellipse(j+radius,i+radius,radius, radius);
+      rect(j+radius,i+radius,radius, radius);
       x++;
     }
   }
-  save("grid.png");
-  if (!hoverPerson.equals("")) {
-    fill (0, 200);
-    rect(mouseX, mouseY, 150, 20);
-    fill (255);
-    text(hoverPerson, mouseX + 5, mouseY + 15);
-  }
-  
-  
-  
+  save("grid.png");  
 }
