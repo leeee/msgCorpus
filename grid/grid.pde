@@ -71,7 +71,7 @@ void draw() {
       x++;
     }
   }
-  
+  save("grid.png");
   if (!hoverPerson.equals("")) {
     fill (0, 200);
     rect(mouseX, mouseY, 150, 20);

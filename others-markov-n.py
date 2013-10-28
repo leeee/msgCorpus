@@ -29,13 +29,15 @@ for handle in allFriends.keys():
 
 
 	friend = allFriends[handle]
-	messageList = friend.messagesToMe
+	messageList = friend.messagesFromMe
 
 	if len(messageList) < 10:
 		continue
 
-	print "FRIEND:" + handle
+	friendFile = open('generated/' + handle + '.txt', 'w')
 
+	print 'generating text for ' + handle + '\n'
+	
 	dictionary = {}
 	nonword = '\n'
 	nfactor = 1
@@ -56,18 +58,20 @@ for handle in allFriends.keys():
 			for i in xrange(nfactor):
 				previous.append(nonword)
 
-	maxwords = 10
+	maxwords = 50
 
-	for x in xrange(10):
+	for x in xrange(50):
 		for i in xrange(maxwords):
 		    newword = random.choice(dictionary[tuple(previous)])
 		    if newword == nonword:
 				previous = []
 				for i in xrange(nfactor):
 					previous.append(nonword)
-		    sys.stdout.write(newword + ' ')
+		    friendFile.write(newword)
+		    if newword != '\n':
+		    	friendFile.write(' ')
 		    previous = previous[1:]
 		    previous.append(newword)
 
-	print '\n'
+	friendFile.close()
 
