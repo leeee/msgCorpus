@@ -68,5 +68,10 @@ void draw() {
       x++;
     }
   }
-  save("grid.png");  
+}
+
+void keyPressed() {
+  if (key == 's') {
+    save("grid.tif");  
+  }
 }
