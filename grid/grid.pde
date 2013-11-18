@@ -30,7 +30,7 @@ void setup() {
       } else {
         h += GOLDEN_RATIO*.75;
         h %= 1;
-        peopleMap.put(msg.id,new Person(h,.5,.90));
+        peopleMap.put(msg.id,new Person(h,.7,.5));
       }
     }
   }
@@ -57,12 +57,13 @@ void draw() {
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,a);
       colorMode(RGB,255,255,255);
-      stroke(255);
-      strokeWeight(2);
-      float radius = (float)POINT_SIZE - 2;
+//      stroke(255);
+//      strokeWeight(2);
+      float radius = (float)POINT_SIZE - 3;
       ellipse(j,i,radius, radius);
       if (message.isFromMe == 1) {
-        ellipse(j,i, POINT_SIZE - 8, POINT_SIZE - 8);
+        fill(255);
+        ellipse(j,i, POINT_SIZE - 7, POINT_SIZE - 7);
       }
 
       x++;
