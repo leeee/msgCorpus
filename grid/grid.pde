@@ -3,7 +3,7 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 1;
+final int POINT_SIZE = 3;
 PFont font;
 int dimension;
 final float GOLDEN_RATIO = 0.618033988749895;
@@ -57,9 +57,10 @@ void draw() {
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,a);
       colorMode(RGB,255,255,255);
-//      stroke(person.r,person.g,person.b,a);
+      stroke(255);
+      strokeWeight(2);
       float radius = (float)POINT_SIZE;
-      rect(j,i,radius, radius);
+      ellipse(j,i,radius, radius);
       x++;
     }
   }
