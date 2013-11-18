@@ -43,8 +43,8 @@ void setup() {
 void draw() {
   background(255);
   int x = 0;
-  for (int i = 0; i < height; i+=POINT_SIZE) {
-    for (int j = 0; j < width; j+=POINT_SIZE) {
+  for (int i = POINT_SIZE/2; i < height; i+=POINT_SIZE) {
+    for (int j = POINT_SIZE/2; j < width; j+=POINT_SIZE) {
       if (x >= messages.size()) {
         return;
       }
@@ -57,8 +57,8 @@ void draw() {
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,a);
       colorMode(RGB,255,255,255);
-      stroke(255);
-      strokeWeight(2);
+//      stroke(255);
+//      strokeWeight(2);
       float radius = (float)POINT_SIZE;
       ellipse(j,i,radius, radius);
       x++;
