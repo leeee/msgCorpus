@@ -3,7 +3,7 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 3;
+final int POINT_SIZE = 10;
 PFont font;
 int dimension;
 final float GOLDEN_RATIO = 0.618033988749895;
@@ -51,16 +51,20 @@ void draw() {
       Message message = messages.get(x);
       Person person = peopleMap.get(message.id);
       float a = 255;
-      if (message.isFromMe == 1) {
-        a = a - 75;
-      }
+//      if (message.isFromMe == 1) {
+//        a = a - 75;
+//      }
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,a);
       colorMode(RGB,255,255,255);
-//      stroke(255);
-//      strokeWeight(2);
-      float radius = (float)POINT_SIZE;
+      stroke(255);
+      strokeWeight(2);
+      float radius = (float)POINT_SIZE - 2;
       ellipse(j,i,radius, radius);
+      if (message.isFromMe == 1) {
+        ellipse(j,i, POINT_SIZE - 8, POINT_SIZE - 8);
+      }
+
       x++;
     }
   }
