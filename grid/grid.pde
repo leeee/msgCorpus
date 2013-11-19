@@ -16,12 +16,13 @@ String[] lastLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
                     "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
 void setup() {
-  float h = random(1);
+//  float h = random(1); 
+  float h = 0.6 + random(.1); // also try 0.4, 0.5, 0.6, 0.9
   Table initialsTable = loadTable("handlesinitials.csv", "header");
   font = createFont("Georgia", 11, true); // how to make smaller?
   messages = new ArrayList();
   peopleMap = new HashMap();
-  db = new SQLite(this, "messages.db");  
+  db = new SQLite(this, "le-nov.db");  
 
   if (db.connect()) {      
     db.query( "SELECT message.is_from_me,message.text,handle.id FROM " 
@@ -38,26 +39,26 @@ void setup() {
       } else {
         h += GOLDEN_RATIO*.75;
         h %= 1;
-        Person newPerson = new Person(h,.7,.5);
-//        newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
-//                             + lastLetters[floor(random(lastLetters.length - 1))];
+        Person newPerson = new Person(h,.55,.5);
         // find initials
         TableRow result = initialsTable.findRow(msg.id,"number");
         if (result != null) {
           String initials = result.getString("initials");
           if (initials.equals("robot")) {
             newPerson.initials = "RB";
+            newPerson.isRobot = true;
             // grayscale or robot face
           } else if (initials.equals("unknown")) {
-            newPerson.initials = "??";
+            newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
+                                 + lastLetters[floor(random(lastLetters.length - 1))];
           } else {
             newPerson.initials = result.getString("initials");
           }
         } else {
-          newPerson.initials = "XX";
+          newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
+                               + lastLetters[floor(random(lastLetters.length - 1))];
         }
         peopleMap.put(msg.id, newPerson);
-        println(newPerson.initials);
       }
     }
   }
@@ -80,6 +81,9 @@ void draw() {
       colorMode(HSB,1,1,1);
       fill(person.h,person.s,person.b,255);
       colorMode(RGB,255,255,255);
+      if (person.isRobot) {
+        fill(150);
+      }
 
       float radius = (float)POINT_SIZE - 3;
       ellipse(j,i,radius, radius);
