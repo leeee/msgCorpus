@@ -18,7 +18,7 @@ String[] lastLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
 void setup() {
   float h = random(1);
   Table initialsTable = loadTable("handlesinitials.csv", "header");
-  font = createFont("Arial", 11, true); // how to make smaller?
+  font = createFont("Georgia", 11, true); // how to make smaller?
   messages = new ArrayList();
   peopleMap = new HashMap();
   db = new SQLite(this, "messages.db");  
@@ -89,11 +89,10 @@ void draw() {
         colorMode(HSB,1,1,1);
         fill(person.h,person.s,person.b,255);
         colorMode(RGB,255,255,255);
-        text(person.initials, j - 9, i + 5);
       } else {
         fill(255);
-        text(person.initials, j - 9, i + 5);
       }
+      text(person.initials, j - (textWidth(person.initials)/2.) * 1.075, i + 5);
 
       x++;
     }
