@@ -3,14 +3,21 @@ import de.bezier.data.sql.*;
 SQLite db;
 ArrayList<Message> messages;
 HashMap<String, Person> peopleMap;
-final int POINT_SIZE = 10;
+final int POINT_SIZE = 40;
 PFont font;
 int dimension;
 final float GOLDEN_RATIO = 0.618033988749895;
+String[] firstLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", 
+                    "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+                    "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
+String[] lastLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", 
+                    "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+                    "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
 void setup() {
   float h = random(1);
-  font = createFont("Arial", 16, true);
+  font = createFont("Arial", 11, true); // how to make smaller?
   messages = new ArrayList();
   peopleMap = new HashMap();
   db = new SQLite(this, "messages.db");  
@@ -30,7 +37,11 @@ void setup() {
       } else {
         h += GOLDEN_RATIO*.75;
         h %= 1;
-        peopleMap.put(msg.id,new Person(h,.7,.5));
+        Person newPerson = new Person(h,.7,.5);
+        newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
+                             + lastLetters[floor(random(lastLetters.length - 1))];
+        peopleMap.put(msg.id, newPerson);
+        println(newPerson.initials);
       }
     }
   }
@@ -50,20 +61,22 @@ void draw() {
       }
       Message message = messages.get(x);
       Person person = peopleMap.get(message.id);
-      float a = 255;
-//      if (message.isFromMe == 1) {
-//        a = a - 75;
-//      }
       colorMode(HSB,1,1,1);
-      fill(person.h,person.s,person.b,a);
+      fill(person.h,person.s,person.b,255);
       colorMode(RGB,255,255,255);
-//      stroke(255);
-//      strokeWeight(2);
+
       float radius = (float)POINT_SIZE - 3;
       ellipse(j,i,radius, radius);
       if (message.isFromMe == 1) {
         fill(255);
-        ellipse(j,i, POINT_SIZE - 7, POINT_SIZE - 7);
+        ellipse(j,i, POINT_SIZE - 10, POINT_SIZE - 10);
+        colorMode(HSB,1,1,1);
+        fill(person.h,person.s,person.b,255);
+        colorMode(RGB,255,255,255);
+        text(person.initials, j - 9, i + 5);
+      } else {
+        fill(255);
+        text(person.initials, j - 9, i + 5);
       }
 
       x++;
