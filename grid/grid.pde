@@ -17,6 +17,7 @@ String[] lastLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
 
 void setup() {
   float h = random(1);
+  Table initialsTable = loadTable("handlesinitials.csv", "header");
   font = createFont("Arial", 11, true); // how to make smaller?
   messages = new ArrayList();
   peopleMap = new HashMap();
@@ -38,8 +39,23 @@ void setup() {
         h += GOLDEN_RATIO*.75;
         h %= 1;
         Person newPerson = new Person(h,.7,.5);
-        newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
-                             + lastLetters[floor(random(lastLetters.length - 1))];
+//        newPerson.initials = firstLetters[floor(random(firstLetters.length - 1))] 
+//                             + lastLetters[floor(random(lastLetters.length - 1))];
+        // find initials
+        TableRow result = initialsTable.findRow(msg.id,"number");
+        if (result != null) {
+          String initials = result.getString("initials");
+          if (initials.equals("robot")) {
+            newPerson.initials = "RB";
+            // grayscale or robot face
+          } else if (initials.equals("unknown")) {
+            newPerson.initials = "??";
+          } else {
+            newPerson.initials = result.getString("initials");
+          }
+        } else {
+          newPerson.initials = "XX";
+        }
         peopleMap.put(msg.id, newPerson);
         println(newPerson.initials);
       }
